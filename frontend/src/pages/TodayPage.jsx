@@ -15,6 +15,7 @@ import { formatCompact, formatDate, formatDuration, formatMoney, formatNumber, p
 import { localTime, weekday } from '../lib/time.js'
 import { useAction } from '../lib/useAction.js'
 import { useCountUp } from '../lib/useCountUp.js'
+import { useCardTable } from '../lib/useCardTable.js'
 
 function CountUp({ value }) {
   return formatNumber(useCountUp(value))
@@ -22,6 +23,7 @@ function CountUp({ value }) {
 
 export function TodayPage() {
   const { t, lang } = useT()
+  const waitersTable = useCardTable()
   const query = useQuery({ queryKey: ['today'], queryFn: () => api.get('/dashboard/today'), refetchInterval: 15_000 })
   const startBatch = useAction((menuItemId) => api.post('/batches', { menuItemId }), {
     invalidate: ['today', 'menu', 'exceptions'],
@@ -52,9 +54,9 @@ export function TodayPage() {
                     <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" /><span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" /></span>
                     {t('today.revenue')}
                   </p>
-                  <p className="num mt-3 bg-gradient-to-br from-white via-white to-indigo-200 bg-clip-text text-[60px] leading-none font-semibold tracking-[-0.04em] text-transparent">
+                  <p className="num mt-3 bg-gradient-to-br from-white via-white to-indigo-200 bg-clip-text text-[44px] sm:text-[60px] leading-none font-semibold tracking-[-0.04em] text-transparent">
                     <CountUp value={data.today.revenue} />
-                    <span className="ml-2 text-[22px] font-medium tracking-normal text-white/50">{lang === 'ru' ? 'сум' : "so'm"}</span>
+                    <span className="ml-2 text-[18px] sm:text-[22px] font-medium tracking-normal text-white/50">{lang === 'ru' ? 'сум' : "so'm"}</span>
                   </p>
                   <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">
                     <span
@@ -194,7 +196,7 @@ export function TodayPage() {
               </div>
 
               <Card title={t('today.waiters')} bodyClassName="overflow-x-auto">
-                <table className="w-full min-w-[640px] text-left">
+                <table ref={waitersTable} className="rtable w-full min-w-[640px] text-left">
                   <thead className="text-[12px] text-muted">
                     <tr className="border-b border-line">
                       <th className="px-5 py-2.5 font-semibold">{t('today.colWaiter')}</th>

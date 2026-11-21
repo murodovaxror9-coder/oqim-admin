@@ -12,12 +12,14 @@ import { describeEvent } from '../lib/events.js'
 import { formatDate } from '../lib/format.js'
 import { localDate, localTimeSec } from '../lib/time.js'
 import { toast } from '../store/toast.js'
+import { useCardTable } from '../lib/useCardTable.js'
 
 const PAGE_SIZE = 50
 const EMPTY = { from: '', to: '', category: '', actorId: '', q: '' }
 
 export function AuditPage() {
   const { t, lang } = useT()
+  const auditTable = useCardTable()
   const [filters, setFilters] = useState(EMPTY)
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1)
@@ -115,7 +117,7 @@ export function AuditPage() {
             <div className={`overflow-hidden rounded-xl border border-line bg-surface ${query.isPlaceholderData ? 'opacity-60' : ''}`}>
               {data.items.length ? (
                 <div className="overflow-x-auto">
-                  <table className="w-full min-w-[760px] text-left">
+                  <table ref={auditTable} className="rtable w-full min-w-[760px] text-left">
                     <thead className="text-[12px] text-muted">
                       <tr className="border-b border-line">
                         <th className="w-28 px-5 py-3 font-semibold">{t('audit.colTime')}</th>
@@ -131,7 +133,7 @@ export function AuditPage() {
                         if (date !== lastDate) {
                           lastDate = date
                           rows.push(
-                            <tr key={`d-${date}`} className="bg-mist">
+                            <tr key={`d-${date}`} data-group className="bg-mist">
                               <td colSpan={4} className="px-5 py-1.5 text-[12px] font-semibold text-muted">
                                 {formatDate(date, lang, { weekday: true, year: true })}
                               </td>

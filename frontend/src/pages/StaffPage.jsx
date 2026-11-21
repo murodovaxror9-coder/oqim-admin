@@ -13,6 +13,7 @@ import { formatDuration, formatPhone } from '../lib/format.js'
 import { localTime } from '../lib/time.js'
 import { useAction } from '../lib/useAction.js'
 import { useAuth } from '../store/auth.js'
+import { useCardTable } from '../lib/useCardTable.js'
 
 const ROLE_ORDER = ['waiter', 'cook', 'cashier', 'admin', 'owner']
 const POSTS = { cook: ['hot', 'grill', 'kazan', 'cold', 'bar'] }
@@ -74,6 +75,7 @@ export function StaffPage() {
 
 function People({ users, onEdit, onPin }) {
   const { t } = useT()
+  const staffTable = useCardTable()
   const me = useAuth((s) => s.user)
   const [confirm, setConfirm] = useState(null)
   const block = useAction(({ id, blocked }) => api.post(`/staff/${id}/${blocked ? 'block' : 'unblock'}`), {
@@ -93,7 +95,7 @@ function People({ users, onEdit, onPin }) {
   return (
     <>
       <div className="overflow-x-auto rounded-xl border border-line bg-surface">
-        <table className="w-full min-w-[880px] text-left">
+        <table ref={staffTable} className="rtable w-full min-w-[880px] text-left">
           <thead className="text-[12px] text-muted">
             <tr className="border-b border-line">
               <th className="px-5 py-3 font-semibold">{t('staff.colName')}</th>

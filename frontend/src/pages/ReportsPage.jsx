@@ -14,11 +14,14 @@ import { api, qs } from '../lib/api.js'
 import { formatCompact, formatDate, formatDuration, formatMoney, formatNumber, percentChange } from '../lib/format.js'
 import { addDays, localDate } from '../lib/time.js'
 import { toast } from '../store/toast.js'
+import { useCardTable } from '../lib/useCardTable.js'
 
 const PRESETS = { today: 0, d7: 6, d30: 29, d90: 89 }
 
 export function ReportsPage() {
   const { t, lang } = useT()
+  const tasksTable = useCardTable()
+  const waitersTable = useCardTable()
   const today = localDate()
   const [preset, setPreset] = useState('d7')
   const [range, setRange] = useState({ from: addDays(today, -6), to: today })
@@ -141,7 +144,7 @@ export function ReportsPage() {
 
               <div className="grid gap-6 xl:grid-cols-2">
                 <Card title={t('reports.tasks')} bodyClassName="overflow-x-auto">
-                  <table className="w-full text-left">
+                  <table ref={tasksTable} className="rtable w-full text-left">
                     <thead className="text-[12px] text-muted">
                       <tr className="border-b border-line">
                         <th className="px-5 py-2.5 font-semibold">{t('reports.colType')}</th>
@@ -170,7 +173,7 @@ export function ReportsPage() {
                 </Card>
 
                 <Card title={t('reports.waiters')} bodyClassName="overflow-x-auto">
-                  <table className="w-full text-left">
+                  <table ref={waitersTable} className="rtable w-full text-left">
                     <thead className="text-[12px] text-muted">
                       <tr className="border-b border-line">
                         <th className="px-5 py-2.5 font-semibold">{t('reports.colWaiter')}</th>
