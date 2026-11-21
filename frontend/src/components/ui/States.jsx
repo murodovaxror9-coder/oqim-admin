@@ -20,7 +20,7 @@ export function ErrorState({ error, onRetry }) {
       <div className="flex items-start gap-3">
         <Icon name="exceptions" />
         <div>
-          <p className="font-bold">{t('common.loadError')}</p>
+          <p className="font-semibold">{t('common.loadError')}</p>
           <p className="mt-1 text-[13px]">{errorText(t, error)}</p>
           {onRetry && (
             <Button size="sm" className="mt-3" onClick={onRetry}>

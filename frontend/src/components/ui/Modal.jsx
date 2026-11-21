@@ -23,12 +23,12 @@ export function Modal({ open, onClose, title, children, footer, width = 'max-w-l
         onClose()
       }}
       onClick={(event) => event.target === ref.current && onClose()}
-      className={`m-auto w-[calc(100%-32px)] ${width} rounded-2xl border border-line bg-white p-0 text-ink shadow-2xl backdrop:bg-navy/45`}
+      className={`m-auto w-[calc(100%-32px)] ${width} rounded-2xl border border-line bg-white p-0 text-ink shadow-2xl backdrop:bg-ink/30 backdrop:backdrop-blur-sm`}
     >
       {open && (
         <div className="flex max-h-[calc(100vh-48px)] flex-col">
           <header className="flex items-center justify-between gap-4 border-b border-line px-6 py-4">
-            <h2 className="text-lg font-bold">{title}</h2>
+            <h2 className="text-lg font-semibold">{title}</h2>
             <button type="button" onClick={onClose} className="rounded-md p-1 text-muted hover:bg-mist hover:text-ink" aria-label={t('common.close')}>
               <Icon name="x" />
             </button>

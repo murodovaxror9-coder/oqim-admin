@@ -109,7 +109,7 @@ function People({ users, onEdit, onPin }) {
               <tr key={user.id} className={`border-b border-line last:border-0 ${user.blocked ? 'bg-mist/60' : ''}`}>
                 <td className="px-5 py-3">
                   <span className="flex items-center gap-3">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-tint text-[13px] font-bold text-brand">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-tint text-[13px] font-semibold text-brand">
                       {user.name.split(' ').map((p) => p[0]).join('').slice(0, 2)}
                     </span>
                     <span>

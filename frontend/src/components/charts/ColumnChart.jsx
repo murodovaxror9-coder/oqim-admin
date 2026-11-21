@@ -3,10 +3,10 @@ import { useT } from '../../i18n/index.js'
 import { Icon } from '../ui/Icon.jsx'
 import { columnPath, niceTicks, useWidth } from './useWidth.js'
 
-const MAIN = '#1e4fc2'
-const COMPARE = '#8a6fd1'
-const GRID = '#e4e9ef'
-const AXIS = '#c9d4e3'
+const MAIN = '#4f46e5'
+const COMPARE = '#a78bfa'
+const GRID = '#efeff2'
+const AXIS = '#d4d4d8'
 
 /**
  * Ustunli grafik, ixtiyoriy taqqoslash chizig'i bilan (masalan: bugun va o'tgan hafta).

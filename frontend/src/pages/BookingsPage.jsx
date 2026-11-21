@@ -155,7 +155,7 @@ function Timeline({ data, date, onOpen }) {
                       style={{ left: `${left}%`, width: `${width}%` }}
                       title={`${booking.guestName}, ${localTime(booking.startsAt)}–${localTime(booking.endsAt)}`}
                     >
-                      <span className="block truncate font-bold">{booking.guestName}</span>
+                      <span className="block truncate font-semibold">{booking.guestName}</span>
                       <span className="block truncate">
                         <span className="num text-[13px]">{localTime(booking.startsAt)}</span> · {t('common.people', { n: booking.guests })}
                       </span>

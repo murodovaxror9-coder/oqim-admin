@@ -50,13 +50,13 @@ export function LoginPage() {
                 key={row}
                 d={`M0 ${40 + row * 34} C 90 ${10 + row * 34}, 170 ${70 + row * 34}, 260 ${40 + row * 34} S 430 ${10 + row * 34}, 520 ${40 + row * 34}`}
                 fill="none"
-                stroke={row === 1 ? '#8fb0ff' : '#22385c'}
+                stroke={row === 1 ? '#a5b4fc' : '#3f3f46'}
                 strokeWidth={row === 1 ? 3 : 2}
               />
             ))}
-            <circle cx="260" cy="74" r="7" fill="#1e4fc2" stroke="#0b1a33" strokeWidth="3" />
+            <circle cx="260" cy="74" r="7" fill="#6366f1" stroke="#18181b" strokeWidth="3" />
           </svg>
-          <p className="text-[28px] leading-snug font-bold tracking-[-0.01em]">{t('login.side')}</p>
+          <p className="text-[28px] leading-snug font-semibold tracking-[-0.01em]">{t('login.side')}</p>
         </div>
       </section>
 
@@ -72,7 +72,7 @@ export function LoginPage() {
                 type="button"
                 onClick={() => setLang(code)}
                 aria-pressed={lang === code}
-                className={`h-7 rounded-md px-2.5 text-[12px] font-bold uppercase ${lang === code ? 'bg-navy text-white' : 'text-muted'}`}
+                className={`h-7 rounded-md px-2.5 text-[12px] font-semibold uppercase ${lang === code ? 'bg-navy text-white' : 'text-muted'}`}
               >
                 {code}
               </button>
@@ -81,7 +81,7 @@ export function LoginPage() {
         </div>
 
         <div className="m-auto w-full max-w-[360px] py-10">
-          <h1 className="text-[28px] font-extrabold tracking-[-0.02em]">{t('login.title')}</h1>
+          <h1 className="text-[28px] font-semibold tracking-[-0.02em]">{t('login.title')}</h1>
           <p className="mt-1 text-muted">{t('login.subtitle')}</p>
 
           <form onSubmit={submit} className="mt-8 space-y-4" noValidate>
@@ -127,7 +127,7 @@ export function LoginPage() {
 
           {demo.data?.demoMode && demo.data.logins.length > 0 && (
             <div className="mt-8 rounded-xl border border-dashed border-rule p-4">
-              <p className="text-[13px] font-bold">{t('login.demo')}</p>
+              <p className="text-[13px] font-semibold">{t('login.demo')}</p>
               <p className="text-[12px] text-muted">{t('login.demoHint')}</p>
               <div className="mt-3 space-y-2">
                 {demo.data.logins.map((item) => (

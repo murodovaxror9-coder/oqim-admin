@@ -125,12 +125,12 @@ export function HallPage() {
 function Legend() {
   const { t } = useT()
   const items = [
-    ['#ffffff', '#c9d4e3', t('tableStatus.free')],
-    ['#e8eefb', '#1e4fc2', t('level.calm')],
-    ['#fff1d6', '#e89400', t('level.warn')],
-    ['#fde8e4', '#c93322', t('level.late')],
-    ['#f6f3ff', '#8a6fd1', t('tableStatus.held')],
-    ['#f2f5f5', '#a9b8cc', t('tableStatus.cleaning')],
+    ['#ffffff', '#d4d4d8', t('tableStatus.free')],
+    ['#eef0ff', '#4f46e5', t('level.calm')],
+    ['#fff7e6', '#f59e0b', t('level.warn')],
+    ['#fff0f0', '#e5484d', t('level.late')],
+    ['#f5f3ff', '#a78bfa', t('tableStatus.held')],
+    ['#f6f6f7', '#a1a1aa', t('tableStatus.cleaning')],
   ]
   return (
     <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 px-1 text-[12px] text-muted" aria-label={t('hall.legend')}>
@@ -203,7 +203,7 @@ function TablePanel({ table, hall, elapsedOf, levelOf, now, onClose }) {
       actions={<Button size="icon" variant="ghost" icon="x" onClick={onClose} aria-label={t('common.close')} />}
     >
       {table.booking && (
-        <p className="mb-4 flex items-center gap-2 rounded-lg bg-[#f6f3ff] px-3 py-2 text-[13px] font-medium text-[#4b3a8c]">
+        <p className="mb-4 flex items-center gap-2 rounded-lg bg-[#f5f3ff] px-3 py-2 text-[13px] font-medium text-[#5b21b6]">
           <Icon name="bookings" size={16} />
           {t('hall.booking', { name: table.booking.guestName, n: table.booking.guests, time: localTime(table.booking.startsAt) })}
           {table.booking.note && ` · ${table.booking.note}`}
@@ -212,7 +212,7 @@ function TablePanel({ table, hall, elapsedOf, levelOf, now, onClose }) {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <div>
-          <h3 className="mb-2 text-[13px] font-bold text-muted">{t('hall.order')}</h3>
+          <h3 className="mb-2 text-[13px] font-semibold text-muted">{t('hall.order')}</h3>
           {order ? (
             <>
               <p className="text-[13px] text-muted">
@@ -265,7 +265,7 @@ function TablePanel({ table, hall, elapsedOf, levelOf, now, onClose }) {
 
         <div className="space-y-6">
           <div>
-            <h3 className="mb-2 text-[13px] font-bold text-muted">{t('hall.tasks')}</h3>
+            <h3 className="mb-2 text-[13px] font-semibold text-muted">{t('hall.tasks')}</h3>
             {table.tasks.length ? (
               <ul className="space-y-3">
                 {table.tasks.map((task) => {
@@ -320,7 +320,7 @@ function TablePanel({ table, hall, elapsedOf, levelOf, now, onClose }) {
 
           {order && (
             <div>
-              <h3 className="mb-2 text-[13px] font-bold text-muted">{t('hall.move')}</h3>
+              <h3 className="mb-2 text-[13px] font-semibold text-muted">{t('hall.move')}</h3>
               <div className="flex gap-2">
                 <Select aria-label={t('hall.moveTo')} value={moveTo} onChange={(e) => setMoveTo(e.target.value)} disabled={!freeTables.length}>
                   <option value="">{freeTables.length ? t('hall.moveTo') : t('hall.noFreeTables')}</option>
@@ -344,7 +344,7 @@ function TablePanel({ table, hall, elapsedOf, levelOf, now, onClose }) {
 
 function Row({ label, value, strong }) {
   return (
-    <div className={`flex justify-between gap-3 ${strong ? 'pt-1 text-[14px] font-bold' : 'text-muted'}`}>
+    <div className={`flex justify-between gap-3 ${strong ? 'pt-1 text-[14px] font-semibold' : 'text-muted'}`}>
       <dt>{label}</dt>
       <dd className="num text-[15px]">{value}</dd>
     </div>

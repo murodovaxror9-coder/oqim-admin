@@ -132,7 +132,7 @@ export function AuditPage() {
                           lastDate = date
                           rows.push(
                             <tr key={`d-${date}`} className="bg-mist">
-                              <td colSpan={4} className="px-5 py-1.5 text-[12px] font-bold text-muted">
+                              <td colSpan={4} className="px-5 py-1.5 text-[12px] font-semibold text-muted">
                                 {formatDate(date, lang, { weekday: true, year: true })}
                               </td>
                             </tr>,

@@ -1,35 +1,41 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Manrope", system-ui, sans-serif;
-  --font-num: "Barlow Condensed", "Manrope", sans-serif;
+  --font-sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-num: "Inter Variable", "Inter", system-ui, sans-serif;
 
-  --color-ink: #0f2240;
-  --color-navy: #0b1a33;
-  --color-night: #081427;
-  --color-brand: #1e4fc2;
-  --color-brand-dark: #163c96;
-  --color-sky: #8fb0ff;
-  --color-mist: #f2f5f5;
-  --color-line: #e0e7e6;
-  --color-rule: #d5dee8;
-  --color-muted: #44566f;
-  --color-dim: #a9b8cc;
-  --color-pale: #c9d4e3;
-  --color-deep: #22385c;
-  --color-track: #2b3f60;
-  --color-tint: #e8eefb;
-  --color-warn: #e89400;
-  --color-warn-bg: #fff1d6;
-  --color-warn-ink: #7a4a00;
-  --color-late: #c93322;
-  --color-late-bg: #fde8e4;
-  --color-late-ink: #9e2015;
-  --color-ok: #0b8a83;
-  --color-ok-bg: #e2f4f2;
-  --color-ok-ink: #0a6f69;
-  --color-compare: #8a6fd1;
-  --color-grid: #e4e9ef;
+  /* Zamonaviy neytral palitra + indigo asosiy rang */
+  --color-ink: #18181b;
+  --color-navy: #18181b;
+  --color-night: #09090b;
+  --color-brand: #4f46e5;
+  --color-brand-dark: #4338ca;
+  --color-sky: #a5b4fc;
+  --color-mist: #f6f6f7;
+  --color-line: #ececef;
+  --color-rule: #e2e2e6;
+  --color-muted: #66666f;
+  --color-dim: #a1a1aa;
+  --color-pale: #d4d4d8;
+  --color-deep: #27272a;
+  --color-track: #3f3f46;
+  --color-tint: #eef0ff;
+  --color-warn: #f59e0b;
+  --color-warn-bg: #fff7e6;
+  --color-warn-ink: #92400e;
+  --color-late: #e5484d;
+  --color-late-bg: #fff0f0;
+  --color-late-ink: #b42318;
+  --color-ok: #12a594;
+  --color-ok-bg: #e8f8f5;
+  --color-ok-ink: #0d7a6d;
+  --color-compare: #a78bfa;
+  --color-grid: #efeff2;
+
+  --radius-xl: 14px;
+  --radius-2xl: 18px;
+  --shadow-card: 0 1px 2px rgb(16 16 24 / 0.04), 0 1px 3px rgb(16 16 24 / 0.04);
+  --shadow-pop: 0 12px 32px -8px rgb(16 16 24 / 0.18), 0 2px 6px rgb(16 16 24 / 0.06);
 }
 
 @layer base {
@@ -44,6 +50,17 @@
     color: var(--color-ink);
     font-size: 14px;
     line-height: 1.5;
+    letter-spacing: -0.006em;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  ::selection {
+    background: rgb(79 70 229 / 0.18);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-pale) transparent;
   }
 
   :focus-visible {
@@ -80,7 +97,7 @@
 @utility num {
   font-family: var(--font-num);
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.02em;
 }
 
 @utility field {
@@ -88,18 +105,21 @@
   height: 40px;
   padding-inline: 12px;
   border: 1px solid var(--color-rule);
-  border-radius: 8px;
+  border-radius: 10px;
   background: white;
-  transition: border-color 0.15s;
+  box-shadow: 0 1px 2px rgb(16 16 24 / 0.04);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 
   &:hover {
-    border-color: var(--color-dim);
+    border-color: var(--color-pale);
   }
 
   &:focus {
     outline: none;
     border-color: var(--color-brand);
-    box-shadow: 0 0 0 3px rgb(30 79 194 / 0.15);
+    box-shadow: 0 0 0 4px rgb(79 70 229 / 0.12);
   }
 
   &[aria-invalid="true"] {

@@ -115,7 +115,7 @@ function ExceptionCard({ item, waiters, fetchedAt }) {
               {localTime(item.createdAt)} · {t('exceptions.waitingFor', { t: formatDuration((now - item.createdAt) / 1000) })}
             </span>
           </div>
-          <h2 className="mt-1.5 text-[16px] leading-snug font-bold">{t(`exceptions.titles.${item.type}`, values)}</h2>
+          <h2 className="mt-1.5 text-[16px] leading-snug font-semibold">{t(`exceptions.titles.${item.type}`, values)}</h2>
           <p className="mt-1 text-[14px] text-muted">{t(`exceptions.bodies.${item.type}`, values)}</p>
 
           {open && item.actions.length > 0 && (

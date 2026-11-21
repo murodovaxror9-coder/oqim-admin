@@ -166,9 +166,9 @@ function FloorEditor({ floor, tables, selectedId, onSelect, onMove }) {
             className="cursor-grab outline-none active:cursor-grabbing"
           >
             {table.shape === 'round' ? (
-              <ellipse cx={cx} cy={cy} rx={table.w / 2} ry={table.h / 2} fill={selected ? '#e8eefb' : '#fff'} stroke={selected ? '#1e4fc2' : '#a9b8cc'} strokeWidth="2" />
+              <ellipse cx={cx} cy={cy} rx={table.w / 2} ry={table.h / 2} fill={selected ? '#eef0ff' : '#fff'} stroke={selected ? '#4f46e5' : '#a1a1aa'} strokeWidth="2" />
             ) : (
-              <rect x={table.x} y={table.y} width={table.w} height={table.h} rx="10" fill={selected ? '#e8eefb' : '#fff'} stroke={selected ? '#1e4fc2' : '#a9b8cc'} strokeWidth="2" />
+              <rect x={table.x} y={table.y} width={table.w} height={table.h} rx="10" fill={selected ? '#eef0ff' : '#fff'} stroke={selected ? '#4f46e5' : '#a1a1aa'} strokeWidth="2" />
             )}
             <text x={cx} y={cy - 8} textAnchor="middle" dominantBaseline="central" className="pointer-events-none fill-ink font-num text-[24px] font-semibold">
               {table.number}
@@ -380,10 +380,10 @@ function QrModal({ open, onClose }) {
     const win = window.open('', '_blank', 'width=900,height=700')
     if (!win) return
     win.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${t('tables.qrTitle')}</title><style>
-      body{font-family:Manrope,system-ui,sans-serif;margin:24px;color:#0f2240}
+      body{font-family:Inter,system-ui,sans-serif;margin:24px;color:#18181b}
       .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-      .card{border:1px solid #d5dee8;border-radius:12px;padding:16px;text-align:center;break-inside:avoid}
-      .qr svg{width:160px;height:160px}.n{font-size:22px;font-weight:800;margin:8px 0 4px}.s{font-size:12px;color:#44566f;margin:0}
+      .card{border:1px solid #e2e2e6;border-radius:12px;padding:16px;text-align:center;break-inside:avoid}
+      .qr svg{width:160px;height:160px}.n{font-size:22px;font-weight:800;margin:8px 0 4px}.s{font-size:12px;color:#66666f;margin:0}
     </style></head><body><div class="grid">${cards}</div><script>window.onload=()=>window.print()<\/script></body></html>`)
     win.document.close()
   }
@@ -410,7 +410,7 @@ function QrModal({ open, onClose }) {
           {query.data?.items.map((item) => (
             <li key={item.tableId} className="rounded-xl border border-line p-3 text-center">
               <div className="mx-auto w-32 [&_svg]:h-auto [&_svg]:w-full" dangerouslySetInnerHTML={{ __html: item.svg }} />
-              <p className="mt-2 font-bold">{t('common.table', { n: item.number })}</p>
+              <p className="mt-2 font-semibold">{t('common.table', { n: item.number })}</p>
               <p className="truncate text-[11px] text-muted">{item.url}</p>
             </li>
           ))}

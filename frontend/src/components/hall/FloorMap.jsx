@@ -3,12 +3,12 @@ import { formatDuration } from '../../lib/format.js'
 import { FloorBase } from './FloorBase.jsx'
 
 const STYLE = {
-  free: { fill: '#ffffff', stroke: '#c9d4e3', text: '#44566f' },
-  held: { fill: '#f6f3ff', stroke: '#8a6fd1', text: '#4b3a8c', dash: '6 4' },
-  cleaning: { fill: '#f2f5f5', stroke: '#a9b8cc', text: '#44566f', dash: '4 4' },
-  calm: { fill: '#e8eefb', stroke: '#1e4fc2', text: '#0f2240' },
-  warn: { fill: '#fff1d6', stroke: '#e89400', text: '#7a4a00' },
-  late: { fill: '#fde8e4', stroke: '#c93322', text: '#9e2015' },
+  free: { fill: '#ffffff', stroke: '#d4d4d8', text: '#66666f' },
+  held: { fill: '#f5f3ff', stroke: '#a78bfa', text: '#5b21b6', dash: '6 4' },
+  cleaning: { fill: '#f6f6f7', stroke: '#a1a1aa', text: '#66666f', dash: '4 4' },
+  calm: { fill: '#eef0ff', stroke: '#4f46e5', text: '#18181b' },
+  warn: { fill: '#fff7e6', stroke: '#f59e0b', text: '#92400e' },
+  late: { fill: '#fff0f0', stroke: '#e5484d', text: '#b42318' },
 }
 
 export function styleOf(table) {
@@ -47,7 +47,7 @@ export function FloorMap({ hall, selectedId, onSelect, elapsedOf }) {
               height={table.h + 12}
               rx={table.shape === 'round' ? (table.w + 12) / 2 : 14}
               fill="none"
-              stroke="#1e4fc2"
+              stroke="#4f46e5"
               strokeWidth="2"
               style={{ opacity: selected ? 1 : undefined }}
             />

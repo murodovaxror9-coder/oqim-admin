@@ -133,7 +133,7 @@ function BatchPlan({ item, editable }) {
   return (
     <div className="rounded-xl border border-line p-4">
       <div className="flex items-start justify-between gap-2">
-        <h3 className="flex items-center gap-2 font-bold">
+        <h3 className="flex items-center gap-2 font-semibold">
           <Icon name="pot" size={18} className="text-muted" />
           {lang === 'ru' ? item.nameRu : item.nameUz}
         </h3>

@@ -15,7 +15,7 @@ function Chip({ tone, icon, children, to }) {
     neutral: 'bg-mist text-muted',
     brand: 'bg-tint text-brand',
   }
-  const className = `inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[13px] font-semibold whitespace-nowrap ${tones[tone]}`
+  const className = `inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[13px] font-medium whitespace-nowrap ring-1 ring-current/10 ring-inset ${tones[tone]}`
   const content = (
     <>
       <Icon name={icon} size={16} />
@@ -48,12 +48,12 @@ export function Topbar({ status, onMenu }) {
   }, [open])
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-line bg-white/95 px-4 backdrop-blur lg:px-8">
+    <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-line bg-white/80 px-4 backdrop-blur-xl backdrop-saturate-150 lg:px-8">
       <button type="button" onClick={onMenu} className="rounded-lg p-2 text-muted hover:bg-mist lg:hidden" aria-label={t('nav.openMenu')}>
         <Icon name="menuBars" />
       </button>
       <div className="min-w-0">
-        <p className="truncate font-bold text-ink">{status?.restaurant ?? '…'}</p>
+        <p className="truncate font-semibold tracking-[-0.01em] text-ink">{status?.restaurant ?? '…'}</p>
         <p className="truncate text-[12px] text-muted">
           {status?.branch} · <span className="num text-[14px]">{localTime(now)}</span>
         </p>
@@ -93,14 +93,14 @@ export function Topbar({ status, onMenu }) {
       </div>
 
       <div className="ml-auto flex items-center gap-2 md:ml-2">
-        <div className="flex rounded-lg border border-rule p-0.5" role="group" aria-label={t('topbar.language')}>
+        <div className="flex rounded-[10px] bg-[#ededf0] p-0.5" role="group" aria-label={t('topbar.language')}>
           {['uz', 'ru'].map((code) => (
             <button
               key={code}
               type="button"
               onClick={() => setLang(code)}
               aria-pressed={lang === code}
-              className={`h-7 rounded-md px-2.5 text-[12px] font-bold uppercase ${lang === code ? 'bg-navy text-white' : 'text-muted hover:text-ink'}`}
+              className={`h-7 rounded-lg px-2.5 text-[12px] font-semibold uppercase transition-all ${lang === code ? 'bg-white text-ink shadow-[0_1px_3px_rgb(16_16_24/0.1)]' : 'text-muted hover:text-ink'}`}
             >
               {code}
             </button>
@@ -113,7 +113,7 @@ export function Topbar({ status, onMenu }) {
             aria-expanded={open}
             className="flex items-center gap-2 rounded-lg py-1 pr-2 pl-1 hover:bg-mist"
           >
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-tint text-[13px] font-bold text-brand">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-indigo-400 to-brand text-[12px] font-semibold text-white">
               {user?.name?.split(' ').map((part) => part[0]).join('').slice(0, 2)}
             </span>
             <span className="hidden text-left sm:block">
@@ -123,7 +123,7 @@ export function Topbar({ status, onMenu }) {
             <Icon name="down" size={16} className="text-muted" />
           </button>
           {open && (
-            <div className="absolute right-0 mt-2 w-48 rounded-xl border border-line bg-white p-1 shadow-lg">
+            <div className="absolute right-0 mt-2 w-48 rounded-xl border border-line bg-white p-1 shadow-pop">
               <button
                 type="button"
                 onClick={() => {

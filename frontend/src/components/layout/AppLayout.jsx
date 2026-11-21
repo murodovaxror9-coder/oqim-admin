@@ -13,13 +13,13 @@ export function AppLayout() {
   useEffect(() => setDrawer(false), [location.pathname])
 
   return (
-    <div className="min-h-screen lg:grid lg:grid-cols-[248px_1fr]">
+    <div className="min-h-screen lg:grid lg:grid-cols-[256px_1fr]">
       <aside className="sticky top-0 hidden h-screen lg:block">
         <Sidebar status={status.data} />
       </aside>
       {drawer && (
         <div className="fixed inset-0 z-40 lg:hidden">
-          <button type="button" className="absolute inset-0 bg-navy/50" onClick={() => setDrawer(false)} aria-label="×" />
+          <button type="button" className="absolute inset-0 bg-ink/30 backdrop-blur-sm" onClick={() => setDrawer(false)} aria-label="×" />
           <aside className="relative h-full w-[260px]">
             <Sidebar status={status.data} onNavigate={() => setDrawer(false)} />
           </aside>
