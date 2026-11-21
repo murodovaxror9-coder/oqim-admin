@@ -15,6 +15,7 @@ import { formatCompact, formatDate, formatDuration, formatMoney, formatNumber, p
 import { addDays, localDate } from '../lib/time.js'
 import { toast } from '../store/toast.js'
 import { useCardTable } from '../lib/useCardTable.js'
+import { HeroCard } from '../components/ui/Hero.jsx'
 
 const PRESETS = { today: 0, d7: 6, d30: 29, d90: 89 }
 
@@ -98,21 +99,32 @@ export function ReportsPage() {
           const sourcesTotal = data.sources.reduce((sum, s) => sum + s.count, 0)
           return (
             <div className={`space-y-6 ${query.isPlaceholderData ? 'opacity-60' : ''}`}>
-              <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-6">
-                <StatTile label={t('reports.revenue')} value={formatCompact(data.totals.revenue, lang)} delta={<Delta value={percentChange(data.totals.revenue, data.previous.revenue)} />} sub={vs} />
-                <StatTile label={t('reports.orders')} value={formatNumber(data.totals.orders)} delta={<Delta value={percentChange(data.totals.orders, data.previous.orders)} />} />
-                <StatTile label={t('reports.avgCheck')} value={formatCompact(data.totals.avgCheck, lang)} delta={<Delta value={percentChange(data.totals.avgCheck, data.previous.avgCheck)} />} />
-                <StatTile label={t('reports.guests')} value={formatNumber(data.totals.guests)} delta={<Delta value={percentChange(data.totals.guests, data.previous.guests)} />} />
-                <StatTile
-                  label={t('reports.serve')}
-                  value={formatDuration(data.totals.avgServeSeconds)}
-                  delta={<Delta value={percentChange(data.totals.avgServeSeconds, data.previous.avgServeSeconds)} goodWhenUp={false} />}
+              <div className="grid gap-4 xl:grid-cols-[1.4fr_1fr]">
+                <HeroCard
+                  eyebrow={t('reports.revenue')}
+                  value={data.totals.revenue}
+                  formatValue={(v) => formatCompact(v, lang)}
+                  delta={percentChange(data.totals.revenue, data.previous.revenue)}
+                  note={vs}
+                  stats={[
+                    { label: t('reports.orders'), value: formatNumber(data.totals.orders), sub: <HeroDelta value={percentChange(data.totals.orders, data.previous.orders)} /> },
+                    { label: t('reports.avgCheck'), value: formatCompact(data.totals.avgCheck, lang), sub: <HeroDelta value={percentChange(data.totals.avgCheck, data.previous.avgCheck)} /> },
+                    { label: t('reports.guests'), value: formatNumber(data.totals.guests), sub: <HeroDelta value={percentChange(data.totals.guests, data.previous.guests)} /> },
+                  ]}
                 />
-                <StatTile
-                  label={t('reports.promiseKept')}
-                  value={data.totals.promiseKeptPercent == null ? '—' : `${String(data.totals.promiseKeptPercent).replace('.', ',')}%`}
-                  sub={`${t('reports.discounts')}: ${formatCompact(data.totals.discounts, lang)}`}
-                />
+                <div className="grid grid-cols-2 gap-4 xl:grid-cols-1">
+                  <StatTile
+                    label={t('reports.serve')}
+                    value={formatDuration(data.totals.avgServeSeconds)}
+                    delta={<Delta value={percentChange(data.totals.avgServeSeconds, data.previous.avgServeSeconds)} goodWhenUp={false} />}
+                    sub={vs}
+                  />
+                  <StatTile
+                    label={t('reports.promiseKept')}
+                    value={data.totals.promiseKeptPercent == null ? '—' : `${String(data.totals.promiseKeptPercent).replace('.', ',')}%`}
+                    sub={`${t('reports.discounts')}: ${formatCompact(data.totals.discounts, lang)}`}
+                  />
+                </div>
               </div>
 
               <div className="grid gap-6 xl:grid-cols-2">
@@ -242,5 +254,18 @@ export function ReportsPage() {
         }}
       </QueryState>
     </>
+  )
+}
+
+// Hero ichidagi kichik farq belgisi: to'q fonda o'qiladigan ranglar
+function HeroDelta({ value }) {
+  if (value == null || Number.isNaN(value)) return null
+  const up = value > 0
+  const color = value === 0 ? 'text-white/50' : up ? 'text-emerald-300' : 'text-rose-300'
+  return (
+    <span className={`num font-semibold ${color}`}>
+      {value === 0 ? '→' : up ? '↑' : '↓'} {up ? '+' : ''}
+      {String(value).replace('.', ',')}%
+    </span>
   )
 }
