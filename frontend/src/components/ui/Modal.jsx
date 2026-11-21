@@ -23,7 +23,7 @@ export function Modal({ open, onClose, title, children, footer, width = 'max-w-l
         onClose()
       }}
       onClick={(event) => event.target === ref.current && onClose()}
-      className={`m-auto w-[calc(100%-32px)] ${width} rounded-2xl border border-line bg-white p-0 text-ink shadow-2xl backdrop:bg-ink/30 backdrop:backdrop-blur-sm`}
+      className={`m-auto w-[calc(100%-32px)] ${width} rounded-2xl border border-line bg-surface p-0 text-ink shadow-2xl backdrop:bg-black/40 backdrop:backdrop-blur-sm`}
     >
       {open && (
         <div className="flex max-h-[calc(100vh-48px)] flex-col">

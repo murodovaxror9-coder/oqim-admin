@@ -6,8 +6,10 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router'
 import { App } from './App.jsx'
 import { useLang } from './store/lang.js'
+import { applyTheme, useTheme } from './store/theme.js'
 
 document.documentElement.lang = useLang.getState().lang
+applyTheme(useTheme.getState().theme)
 
 const queryClient = new QueryClient({
   defaultOptions: {

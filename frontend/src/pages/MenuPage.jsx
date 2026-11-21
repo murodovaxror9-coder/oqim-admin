@@ -71,7 +71,7 @@ export function MenuPage() {
                     onClick={() => setCategory(String(cat.id))}
                     aria-pressed={category === String(cat.id)}
                     className={`rounded-full px-3.5 py-1.5 text-[13px] font-semibold ${
-                      category === String(cat.id) ? 'bg-navy text-white' : 'border border-rule bg-white text-muted hover:text-ink'
+                      category === String(cat.id) ? 'bg-navy text-white' : 'border border-rule bg-surface text-muted hover:text-ink'
                     }`}
                   >
                     {name(cat)}
@@ -84,7 +84,7 @@ export function MenuPage() {
               </label>
             </div>
 
-            <div className="overflow-x-auto rounded-xl border border-line bg-white">
+            <div className="overflow-x-auto rounded-xl border border-line bg-surface">
               {items.length ? (
                 <table className="w-full min-w-[820px] text-left">
                   <thead className="text-[12px] text-muted">

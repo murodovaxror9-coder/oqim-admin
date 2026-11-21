@@ -31,6 +31,10 @@
   --color-ok-ink: #0d7a6d;
   --color-compare: #a78bfa;
   --color-grid: #efeff2;
+  --color-surface: #ffffff;
+  --color-sunken: #ededf0;
+  --color-held-bg: #f5f3ff;
+  --color-held-ink: #5b21b6;
 
   --radius-xl: 14px;
   --radius-2xl: 18px;
@@ -93,6 +97,66 @@
       background-position: 200% center;
     }
   }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+}
+
+@keyframes count-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* Tungi rejim: faqat tokenlar almashadi, komponentlar o'zgarmaydi */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-ink: #ededf0;
+  --color-navy: #1a1a22;
+  --color-night: #050507;
+  --color-brand: #6366f1;
+  --color-brand-dark: #4f46e5;
+  --color-mist: #08080b;
+  --color-line: #1f1f26;
+  --color-rule: #2a2a33;
+  --color-muted: #a1a1aa;
+  --color-dim: #71717a;
+  --color-pale: #3f3f46;
+  --color-deep: #27272a;
+  --color-track: #2e2e36;
+  --color-tint: #1c1a3a;
+  --color-warn-bg: #2a1f0a;
+  --color-warn-ink: #fbbf24;
+  --color-late-bg: #2c1214;
+  --color-late-ink: #ff8a8e;
+  --color-ok-bg: #0b2622;
+  --color-ok-ink: #4fd1c0;
+  --color-grid: #1c1c23;
+  --color-surface: #111116;
+  --color-sunken: #1a1a21;
+  --color-held-bg: #1e1733;
+  --color-held-ink: #c4b5fd;
+  --shadow-card: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 1px 3px rgb(0 0 0 / 0.4);
+  --shadow-lift: 0 18px 40px -14px rgb(0 0 0 / 0.7), 0 0 0 1px rgb(129 140 248 / 0.18);
+  --shadow-pop: 0 16px 40px -8px rgb(0 0 0 / 0.7), 0 0 0 1px rgb(255 255 255 / 0.06);
+}
+
+:root {
+  transition: background-color 0.3s;
 }
 
 /* Kartalar va bosiladigan bloklar ustiga kelganda yengil ko'tariladi */

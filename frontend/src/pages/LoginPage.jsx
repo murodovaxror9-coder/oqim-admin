@@ -44,20 +44,20 @@ export function LoginPage() {
     <div className="grid min-h-screen lg:grid-cols-[1fr_540px]">
       <LoginScene />
 
-      <section className="relative flex flex-col overflow-hidden bg-white px-6 py-8 sm:px-12">
+      <section className="relative flex flex-col overflow-hidden bg-surface px-6 py-8 sm:px-12">
         <div className="pointer-events-none absolute -top-40 -right-40 h-80 w-80 rounded-full bg-indigo-200/40 blur-3xl" aria-hidden />
         <div className="flex items-center justify-between">
           <span className="lg:invisible">
             <Logo className="text-ink" />
           </span>
-          <div className="relative flex rounded-[10px] bg-[#ededf0] p-0.5">
+          <div className="relative flex rounded-[10px] bg-sunken p-0.5">
             {['uz', 'ru'].map((code) => (
               <button
                 key={code}
                 type="button"
                 onClick={() => setLang(code)}
                 aria-pressed={lang === code}
-                className={`h-7 rounded-lg px-2.5 text-[12px] font-semibold uppercase transition-all ${lang === code ? 'bg-white text-ink shadow-[0_1px_3px_rgb(16_16_24/0.1)]' : 'text-muted hover:text-ink'}`}
+                className={`h-7 rounded-lg px-2.5 text-[12px] font-semibold uppercase transition-all ${lang === code ? 'bg-surface text-ink shadow-[0_1px_3px_rgb(16_16_24/0.1)]' : 'text-muted hover:text-ink'}`}
               >
                 {code}
               </button>
@@ -66,7 +66,7 @@ export function LoginPage() {
         </div>
 
         <div className="animate-fade-up relative m-auto w-full max-w-[380px] py-10">
-          <div className="mb-6 inline-flex rounded-2xl bg-white p-2 shadow-lift ring-1 ring-line">
+          <div className="mb-6 inline-flex rounded-2xl bg-surface p-2 shadow-lift ring-1 ring-line">
             <LogoMark size={44} animated />
           </div>
           <p className="text-[13px] font-medium text-brand">{t('login.welcome')}</p>
@@ -127,7 +127,7 @@ export function LoginPage() {
                       setPhone(formatPhone(item.phone))
                       setPin(item.pin)
                     }}
-                    className="hover-lift flex w-full items-center justify-between rounded-xl border border-transparent bg-mist px-3 py-2 text-left hover:bg-white"
+                    className="hover-lift flex w-full items-center justify-between rounded-xl border border-transparent bg-mist px-3 py-2 text-left hover:bg-surface"
                   >
                     <span>
                       <span className="block text-[13px] font-semibold">{item.name}</span>

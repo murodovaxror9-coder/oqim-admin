@@ -5,6 +5,7 @@ import { localTime } from '../../lib/time.js'
 import { useNow } from '../../lib/useNow.js'
 import { useAuth } from '../../store/auth.js'
 import { useLang } from '../../store/lang.js'
+import { useTheme } from '../../store/theme.js'
 import { Icon } from '../ui/Icon.jsx'
 
 function Chip({ tone, icon, children, to }) {
@@ -31,10 +32,11 @@ function Chip({ tone, icon, children, to }) {
   )
 }
 
-export function Topbar({ status, onMenu }) {
+export function Topbar({ status, onMenu, onSearch }) {
   const { t } = useT()
   const now = useNow(15000)
   const { lang, setLang } = useLang()
+  const { theme, toggle } = useTheme()
   const { user, logout } = useAuth()
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
@@ -48,7 +50,7 @@ export function Topbar({ status, onMenu }) {
   }, [open])
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-line bg-white/80 px-4 backdrop-blur-xl backdrop-saturate-150 lg:px-8">
+    <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-line/70 bg-surface/70 px-4 backdrop-blur-xl backdrop-saturate-150 lg:px-8">
       <button type="button" onClick={onMenu} className="rounded-lg p-2 text-muted hover:bg-mist lg:hidden" aria-label={t('nav.openMenu')}>
         <Icon name="menuBars" />
       </button>
@@ -93,14 +95,32 @@ export function Topbar({ status, onMenu }) {
       </div>
 
       <div className="ml-auto flex items-center gap-2 md:ml-2">
-        <div className="flex rounded-[10px] bg-[#ededf0] p-0.5" role="group" aria-label={t('topbar.language')}>
+        <button
+          type="button"
+          onClick={onSearch}
+          className="grid h-8 w-8 place-items-center rounded-[10px] text-muted transition-colors hover:bg-mist hover:text-ink lg:hidden"
+          aria-label={t('palette.search')}
+        >
+          <Icon name="search" size={18} />
+        </button>
+        <button
+          type="button"
+          onClick={toggle}
+          className="group relative grid h-8 w-8 place-items-center overflow-hidden rounded-[10px] border border-line bg-surface text-muted shadow-card transition-all hover:text-ink hover:shadow-lift"
+          aria-label={t(theme === 'dark' ? 'palette.themeLight' : 'palette.themeDark')}
+          title={t('palette.theme')}
+        >
+          <Icon name="sun" size={17} className={`absolute transition-all duration-500 ${theme === 'dark' ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-50 opacity-0'}`} />
+          <Icon name="moon" size={17} className={`absolute transition-all duration-500 ${theme === 'dark' ? 'rotate-90 scale-50 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} />
+        </button>
+        <div className="flex rounded-[10px] bg-sunken p-0.5" role="group" aria-label={t('topbar.language')}>
           {['uz', 'ru'].map((code) => (
             <button
               key={code}
               type="button"
               onClick={() => setLang(code)}
               aria-pressed={lang === code}
-              className={`h-7 rounded-lg px-2.5 text-[12px] font-semibold uppercase transition-all ${lang === code ? 'bg-white text-ink shadow-[0_1px_3px_rgb(16_16_24/0.1)]' : 'text-muted hover:text-ink'}`}
+              className={`h-7 rounded-lg px-2.5 text-[12px] font-semibold uppercase transition-all ${lang === code ? 'bg-surface text-ink shadow-[0_1px_3px_rgb(16_16_24/0.1)]' : 'text-muted hover:text-ink'}`}
             >
               {code}
             </button>
@@ -123,7 +143,7 @@ export function Topbar({ status, onMenu }) {
             <Icon name="down" size={16} className="text-muted" />
           </button>
           {open && (
-            <div className="absolute right-0 mt-2 w-48 rounded-xl border border-line bg-white p-1 shadow-pop">
+            <div className="absolute right-0 mt-2 w-48 rounded-xl border border-line bg-surface p-1 shadow-pop">
               <button
                 type="button"
                 onClick={() => {

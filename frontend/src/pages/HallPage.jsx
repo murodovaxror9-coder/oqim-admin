@@ -125,12 +125,12 @@ export function HallPage() {
 function Legend() {
   const { t } = useT()
   const items = [
-    ['#ffffff', '#d4d4d8', t('tableStatus.free')],
-    ['#eef0ff', '#4f46e5', t('level.calm')],
-    ['#fff7e6', '#f59e0b', t('level.warn')],
-    ['#fff0f0', '#e5484d', t('level.late')],
-    ['#f5f3ff', '#a78bfa', t('tableStatus.held')],
-    ['#f6f6f7', '#a1a1aa', t('tableStatus.cleaning')],
+    ['var(--color-surface)', 'var(--color-pale)', t('tableStatus.free')],
+    ['var(--color-tint)', 'var(--color-brand)', t('level.calm')],
+    ['var(--color-warn-bg)', 'var(--color-warn)', t('level.warn')],
+    ['var(--color-late-bg)', 'var(--color-late)', t('level.late')],
+    ['var(--color-held-bg)', 'var(--color-compare)', t('tableStatus.held')],
+    ['var(--color-mist)', 'var(--color-dim)', t('tableStatus.cleaning')],
   ]
   return (
     <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 px-1 text-[12px] text-muted" aria-label={t('hall.legend')}>

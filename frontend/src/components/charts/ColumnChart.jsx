@@ -3,10 +3,10 @@ import { useT } from '../../i18n/index.js'
 import { Icon } from '../ui/Icon.jsx'
 import { columnPath, niceTicks, useWidth } from './useWidth.js'
 
-const MAIN = '#4f46e5'
-const COMPARE = '#a78bfa'
-const GRID = '#efeff2'
-const AXIS = '#d4d4d8'
+const MAIN = 'var(--color-brand)'
+const COMPARE = 'var(--color-compare)'
+const GRID = 'var(--color-grid)'
+const AXIS = 'var(--color-pale)'
 
 /**
  * Ustunli grafik, ixtiyoriy taqqoslash chizig'i bilan (masalan: bugun va o'tgan hafta).
@@ -59,7 +59,7 @@ export function ColumnChart({
               <span className="flex items-center gap-1.5">
                 <svg width="18" height="10" aria-hidden>
                   <line x1="0" y1="5" x2="18" y2="5" stroke={COMPARE} strokeWidth="2" />
-                  <circle cx="9" cy="5" r="3.5" fill={COMPARE} stroke="white" strokeWidth="1.5" />
+                  <circle cx="9" cy="5" r="3.5" fill={COMPARE} stroke="var(--color-surface)" strokeWidth="1.5" />
                 </svg>
                 {compareLabel}
               </span>
@@ -134,7 +134,7 @@ export function ColumnChart({
                 <polyline points={linePoints} fill="none" stroke={COMPARE} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
                 {data.map((d, i) =>
                   d.compare != null && (hover === i || data.length <= 16) ? (
-                    <circle key={d.key} cx={cx(i)} cy={y(d.compare)} r={hover === i ? 5 : 4} fill={COMPARE} stroke="white" strokeWidth="2" />
+                    <circle key={d.key} cx={cx(i)} cy={y(d.compare)} r={hover === i ? 5 : 4} fill={COMPARE} stroke="var(--color-surface)" strokeWidth="2" />
                   ) : null,
                 )}
               </>

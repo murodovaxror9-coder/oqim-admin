@@ -166,9 +166,9 @@ function FloorEditor({ floor, tables, selectedId, onSelect, onMove }) {
             className="cursor-grab outline-none active:cursor-grabbing"
           >
             {table.shape === 'round' ? (
-              <ellipse cx={cx} cy={cy} rx={table.w / 2} ry={table.h / 2} fill={selected ? '#eef0ff' : '#fff'} stroke={selected ? '#4f46e5' : '#a1a1aa'} strokeWidth="2" />
+              <ellipse cx={cx} cy={cy} rx={table.w / 2} ry={table.h / 2} fill={selected ? 'var(--color-tint)' : 'var(--color-surface)'} stroke={selected ? 'var(--color-brand)' : 'var(--color-dim)'} strokeWidth="2" />
             ) : (
-              <rect x={table.x} y={table.y} width={table.w} height={table.h} rx="10" fill={selected ? '#eef0ff' : '#fff'} stroke={selected ? '#4f46e5' : '#a1a1aa'} strokeWidth="2" />
+              <rect x={table.x} y={table.y} width={table.w} height={table.h} rx="10" fill={selected ? 'var(--color-tint)' : 'var(--color-surface)'} stroke={selected ? 'var(--color-brand)' : 'var(--color-dim)'} strokeWidth="2" />
             )}
             <text x={cx} y={cy - 8} textAnchor="middle" dominantBaseline="central" className="pointer-events-none fill-ink font-num text-[24px] font-semibold">
               {table.number}

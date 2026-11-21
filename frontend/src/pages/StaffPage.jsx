@@ -92,7 +92,7 @@ function People({ users, onEdit, onPin }) {
 
   return (
     <>
-      <div className="overflow-x-auto rounded-xl border border-line bg-white">
+      <div className="overflow-x-auto rounded-xl border border-line bg-surface">
         <table className="w-full min-w-[880px] text-left">
           <thead className="text-[12px] text-muted">
             <tr className="border-b border-line">

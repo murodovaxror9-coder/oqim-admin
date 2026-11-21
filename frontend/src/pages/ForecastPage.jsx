@@ -34,7 +34,7 @@ export function ForecastPage() {
             role="tab"
             aria-selected={day === date}
             onClick={() => setDate(day)}
-            className={`rounded-lg px-3 py-2 text-left ${day === date ? 'bg-navy text-white' : 'border border-rule bg-white hover:bg-mist'}`}
+            className={`rounded-lg px-3 py-2 text-left ${day === date ? 'bg-navy text-white' : 'border border-rule bg-surface hover:bg-mist'}`}
           >
             <span className={`block text-[12px] ${day === date ? 'text-dim' : 'text-muted'}`}>
               {day === today ? t('common.today') : day === addDays(today, 1) ? t('common.tomorrow') : weekdayName(weekday(day), lang)}

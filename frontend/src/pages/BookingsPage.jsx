@@ -110,7 +110,7 @@ function Timeline({ data, date, onOpen }) {
   const nowPct = now > start && now < start + span ? pct(now) : null
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-line bg-white">
+    <div className="overflow-x-auto rounded-xl border border-line bg-surface">
       <div className="min-w-[820px]">
         <div className="flex border-b border-line text-[11px] text-muted">
           <div className="w-28 shrink-0 px-4 py-2 font-semibold">{t('bookings.table')}</div>
@@ -175,13 +175,13 @@ function BookingList({ bookings, onOpen }) {
   const { t } = useT()
   if (!bookings.length) {
     return (
-      <div className="rounded-xl border border-line bg-white">
+      <div className="rounded-xl border border-line bg-surface">
         <Empty icon="bookings" title={t('bookings.empty')} />
       </div>
     )
   }
   return (
-    <ul className="divide-y divide-line rounded-xl border border-line bg-white">
+    <ul className="divide-y divide-line rounded-xl border border-line bg-surface">
       {bookings.map((b) => (
         <li key={b.id}>
           <button type="button" onClick={() => onOpen(b)} className="flex w-full items-center gap-4 px-5 py-3.5 text-left hover:bg-mist/60">

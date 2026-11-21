@@ -14,6 +14,11 @@ import { describeEvent } from '../lib/events.js'
 import { formatCompact, formatDate, formatDuration, formatMoney, formatNumber, percentChange, weekdayName } from '../lib/format.js'
 import { localTime, weekday } from '../lib/time.js'
 import { useAction } from '../lib/useAction.js'
+import { useCountUp } from '../lib/useCountUp.js'
+
+function CountUp({ value }) {
+  return formatNumber(useCountUp(value))
+}
 
 export function TodayPage() {
   const { t, lang } = useT()
@@ -37,42 +42,53 @@ export function TodayPage() {
           return (
             <div className="space-y-6">
               <div className="grid gap-4 xl:grid-cols-[1.25fr_2fr]">
-                <section className="rounded-xl bg-navy p-6 text-white">
-                  <p className="text-[13px] font-medium text-dim">{t('today.revenue')}</p>
-                  <p className="num mt-2 text-[56px] leading-none font-semibold tracking-tight">
-                    {formatNumber(data.today.revenue)}
-                    <span className="ml-2 text-[22px] font-medium text-dim">{lang === 'ru' ? 'сум' : "so'm"}</span>
+                <section className="group relative isolate overflow-hidden rounded-[20px] bg-[#0c0b1d] p-6 text-white shadow-[0_24px_60px_-20px_rgb(49_46_129/0.65)] ring-1 ring-white/10">
+                  <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
+                    <div className="absolute -top-24 -left-16 h-72 w-72 rounded-full bg-indigo-600/50 blur-[80px] animate-[count-glow_6s_ease-in-out_infinite]" />
+                    <div className="absolute -right-20 -bottom-28 h-80 w-80 rounded-full bg-violet-600/40 blur-[90px] animate-[count-glow_7s_ease-in-out_infinite_-3s]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(rgb(255_255_255/0.05)_1px,transparent_1px),linear-gradient(90deg,rgb(255_255_255/0.05)_1px,transparent_1px)] bg-[size:28px_28px] [mask-image:radial-gradient(ellipse_at_top_right,black_20%,transparent_70%)]" />
+                  </div>
+                  <p className="flex items-center gap-2 text-[13px] font-medium text-white/60">
+                    <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" /><span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" /></span>
+                    {t('today.revenue')}
+                  </p>
+                  <p className="num mt-3 bg-gradient-to-br from-white via-white to-indigo-200 bg-clip-text text-[60px] leading-none font-semibold tracking-[-0.04em] text-transparent">
+                    <CountUp value={data.today.revenue} />
+                    <span className="ml-2 text-[22px] font-medium tracking-normal text-white/50">{lang === 'ru' ? 'сум' : "so'm"}</span>
                   </p>
                   <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <span className="rounded-md bg-white px-2 py-0.5">
+                    <span
+                      className="rounded-lg bg-white px-2 py-0.5"
+                      style={{ '--color-ok-ink': '#0d7a6d', '--color-late-ink': '#b42318', '--color-muted': '#66666f' }}
+                    >
                       <Delta value={percentChange(data.today.revenue, data.lastWeek.revenue)} />
                     </span>
-                    <span className="text-[13px] text-dim">
+                    <span className="text-[13px] text-white/55">
                       {t('today.vsLastWeek', { weekday: wd, value: formatMoney(data.lastWeek.revenue, lang) })}
                     </span>
                   </div>
-                  <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-track pt-5 sm:grid-cols-4">
+                  <dl className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
                     {[
                       ['busy', `${data.live.busy}/${data.live.tables}`],
                       ['guestsNow', data.live.guests],
                       ['lateNow', data.live.lateTasks],
                       ['openExceptions', data.live.openExceptions],
                     ].map(([key, value]) => (
-                      <div key={key}>
-                        <dt className="text-[12px] text-dim">{t(`today.${key}`)}</dt>
+                      <div key={key} className="rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5 backdrop-blur-sm transition-colors hover:bg-white/[0.08]">
+                        <dt className="text-[12px] text-white/55">{t(`today.${key}`)}</dt>
                         <dd className={`num text-[28px] leading-tight ${key === 'lateNow' && value > 0 ? 'text-[#ff8a7a]' : ''}`}>{value}</dd>
                       </div>
                     ))}
                   </dl>
                   <div className="mt-5 flex flex-wrap gap-2">
-                    <Link to="/hall" className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-3 py-1.5 text-[13px] font-semibold hover:bg-brand-dark">
+                    <Link to="/hall" className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 text-[13px] font-semibold text-[#0c0b1d] shadow-[0_8px_20px_-6px_rgb(255_255_255/0.4)] transition-all hover:-translate-y-px hover:shadow-[0_10px_28px_-6px_rgb(165_180_252/0.7)]">
                       <Icon name="hall" size={16} />
                       {t('nav.hall')}
                     </Link>
                     {data.live.openExceptions > 0 && (
                       <Link
                         to="/exceptions"
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-1.5 text-[13px] font-semibold hover:bg-white/15"
+                        className="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-1.5 text-[13px] font-semibold ring-1 ring-white/15 transition-all hover:-translate-y-px hover:bg-white/15"
                       >
                         <Icon name="exceptions" size={16} />
                         {t('topbar.exceptions', { n: data.live.openExceptions })}

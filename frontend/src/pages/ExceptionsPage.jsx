@@ -52,7 +52,7 @@ export function ExceptionsPage() {
               ))}
             </ul>
           ) : (
-            <div className="rounded-xl border border-line bg-white">
+            <div className="rounded-xl border border-line bg-surface">
               <Empty title={status === 'open' ? t('exceptions.empty') : t('exceptions.emptyResolved')} />
             </div>
           )
@@ -102,7 +102,7 @@ function ExceptionCard({ item, waiters, fetchedAt }) {
   const accent = { late: 'border-l-late', warn: 'border-l-warn', brand: 'border-l-brand', neutral: 'border-l-pale' }[tone]
 
   return (
-    <li className={`rounded-xl border border-l-4 border-line bg-white p-5 ${accent}`}>
+    <li className={`rounded-xl border border-l-4 border-line bg-surface p-5 ${accent}`}>
       <div className="flex items-start gap-3">
         <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-full ${open ? 'bg-mist text-ink' : 'bg-mist text-muted'}`}>
           <Icon name={ICONS[item.type]} />

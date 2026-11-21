@@ -112,7 +112,7 @@ export function AuditPage() {
           const to = Math.min(data.total, data.page * data.pageSize)
           let lastDate = null
           return (
-            <div className={`overflow-hidden rounded-xl border border-line bg-white ${query.isPlaceholderData ? 'opacity-60' : ''}`}>
+            <div className={`overflow-hidden rounded-xl border border-line bg-surface ${query.isPlaceholderData ? 'opacity-60' : ''}`}>
               {data.items.length ? (
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[760px] text-left">

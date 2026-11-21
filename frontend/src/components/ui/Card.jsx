@@ -1,6 +1,6 @@
 export function Card({ title, subtitle, actions, children, className = '', bodyClassName = 'p-5', as: Tag = 'section' }) {
   return (
-    <Tag className={`min-w-0 rounded-2xl border border-line bg-white shadow-card transition-shadow duration-300 hover:shadow-lift ${className}`}>
+    <Tag className={`min-w-0 rounded-2xl border border-line bg-surface shadow-card transition-shadow duration-300 hover:shadow-lift ${className}`}>
       {(title || actions) && (
         <header className="flex flex-wrap items-start justify-between gap-3 border-b border-line px-5 py-4">
           <div className="min-w-0">

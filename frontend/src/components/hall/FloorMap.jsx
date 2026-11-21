@@ -3,12 +3,12 @@ import { formatDuration } from '../../lib/format.js'
 import { FloorBase } from './FloorBase.jsx'
 
 const STYLE = {
-  free: { fill: '#ffffff', stroke: '#d4d4d8', text: '#66666f' },
-  held: { fill: '#f5f3ff', stroke: '#a78bfa', text: '#5b21b6', dash: '6 4' },
-  cleaning: { fill: '#f6f6f7', stroke: '#a1a1aa', text: '#66666f', dash: '4 4' },
-  calm: { fill: '#eef0ff', stroke: '#4f46e5', text: '#18181b' },
-  warn: { fill: '#fff7e6', stroke: '#f59e0b', text: '#92400e' },
-  late: { fill: '#fff0f0', stroke: '#e5484d', text: '#b42318' },
+  free: { fill: 'var(--color-surface)', stroke: 'var(--color-pale)', text: 'var(--color-muted)' },
+  held: { fill: 'var(--color-held-bg)', stroke: 'var(--color-compare)', text: 'var(--color-held-ink)', dash: '6 4' },
+  cleaning: { fill: 'var(--color-mist)', stroke: 'var(--color-dim)', text: 'var(--color-muted)', dash: '4 4' },
+  calm: { fill: 'var(--color-tint)', stroke: 'var(--color-brand)', text: 'var(--color-ink)' },
+  warn: { fill: 'var(--color-warn-bg)', stroke: 'var(--color-warn)', text: 'var(--color-warn-ink)' },
+  late: { fill: 'var(--color-late-bg)', stroke: 'var(--color-late)', text: 'var(--color-late-ink)' },
 }
 
 export function styleOf(table) {
@@ -47,7 +47,7 @@ export function FloorMap({ hall, selectedId, onSelect, elapsedOf }) {
               height={table.h + 12}
               rx={table.shape === 'round' ? (table.w + 12) / 2 : 14}
               fill="none"
-              stroke="#4f46e5"
+              stroke="var(--color-brand)"
               strokeWidth="2"
               style={{ opacity: selected ? 1 : undefined }}
             />
