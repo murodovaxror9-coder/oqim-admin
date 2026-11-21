@@ -2,11 +2,11 @@ import { Icon } from './Icon.jsx'
 
 const VARIANTS = {
   primary:
-    'bg-brand text-white shadow-[0_1px_2px_rgb(16_16_24/0.12),inset_0_1px_0_rgb(255_255_255/0.12)] hover:bg-brand-dark disabled:bg-pale disabled:shadow-none',
+    'bg-brand text-white shadow-[0_1px_2px_rgb(16_16_24/0.12),inset_0_1px_0_rgb(255_255_255/0.12)] hover:bg-brand-dark hover:shadow-glow disabled:bg-pale disabled:shadow-none',
   secondary: 'bg-white text-ink border border-rule shadow-[0_1px_2px_rgb(16_16_24/0.05)] hover:bg-mist hover:border-pale disabled:text-dim',
   ghost: 'text-muted hover:bg-mist hover:text-ink disabled:text-dim',
   danger: 'bg-white text-late-ink border border-late/25 shadow-[0_1px_2px_rgb(16_16_24/0.05)] hover:bg-late-bg disabled:text-dim',
-  dangerSolid: 'bg-late text-white shadow-[0_1px_2px_rgb(16_16_24/0.12)] hover:bg-late-ink disabled:bg-pale',
+  dangerSolid: 'bg-late text-white shadow-[0_1px_2px_rgb(16_16_24/0.12)] hover:bg-late-ink hover:shadow-[0_8px_24px_-6px_rgb(229_72_77/0.5)] disabled:bg-pale',
 }
 
 const SIZES = {
@@ -19,7 +19,7 @@ export function Button({ variant = 'secondary', size = 'md', icon, loading, chil
   return (
     <button
       type={type}
-      className={`inline-flex items-center font-medium whitespace-nowrap transition-all duration-150 active:scale-[0.98] disabled:active:scale-100 ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
+      className={`inline-flex items-center font-medium whitespace-nowrap transition-all duration-200 hover:-translate-y-px active:translate-y-0 active:scale-[0.98] disabled:active:scale-100 ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
       disabled={loading || props.disabled}
       {...props}
     >

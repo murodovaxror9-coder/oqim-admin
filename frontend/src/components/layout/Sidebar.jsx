@@ -1,26 +1,10 @@
 import { NavLink } from 'react-router'
 import { useT } from '../../i18n/index.js'
 import { Icon } from '../ui/Icon.jsx'
+import { Logo } from '../ui/Logo.jsx'
 import { NAV } from './nav.js'
 
-export function Logo({ className = '' }) {
-  return (
-    <span className={`flex items-center gap-2.5 ${className}`}>
-      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden>
-        <defs>
-          <linearGradient id="oqim-logo" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#6366f1" />
-            <stop offset="1" stopColor="#4338ca" />
-          </linearGradient>
-        </defs>
-        <rect width="32" height="32" rx="9" fill="url(#oqim-logo)" />
-        <path d="M7 19c3-5 6-5 9 0s6 5 9 0" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
-        <path d="M7 13c3-5 6-5 9 0s6 5 9 0" fill="none" stroke="#c7d2fe" strokeWidth="3" strokeLinecap="round" />
-      </svg>
-      <span className="text-[18px] font-semibold tracking-[-0.03em]">Oqim</span>
-    </span>
-  )
-}
+export { Logo }
 
 export function Sidebar({ status, onNavigate }) {
   const { t } = useT()
@@ -50,12 +34,12 @@ export function Sidebar({ status, onNavigate }) {
                       onClick={onNavigate}
                       className={({ isActive }) =>
                         `group flex items-center gap-3 rounded-[10px] px-3 py-2 font-medium transition-colors ${
-                          isActive ? 'bg-tint text-brand' : 'hover:bg-mist hover:text-ink'
+                          isActive ? 'bg-tint text-brand shadow-[inset_0_0_0_1px_rgb(79_70_229/0.12)]' : 'hover:bg-mist hover:text-ink'
                         }`
                       }
                     >
-                      <Icon name={item.icon} size={18} />
-                      <span className="flex-1">{t(`nav.${item.key}`)}</span>
+                      <Icon name={item.icon} size={18} className="transition-transform duration-200 group-hover:scale-110" />
+                      <span className="flex-1 transition-transform duration-200 group-hover:translate-x-0.5">{t(`nav.${item.key}`)}</span>
                       {item.badge === 'exceptions' && status?.openExceptions > 0 && (
                         <span className="num min-w-5 rounded-full bg-late px-1.5 text-center text-[12px] leading-5 font-semibold text-white">
                           {status.openExceptions}

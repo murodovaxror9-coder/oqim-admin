@@ -21,7 +21,7 @@ export function Delta({ value, goodWhenUp = true, suffix = '%', label }) {
 export function StatTile({ label, value, sub, delta, tone, className = '' }) {
   const toneClass = tone === 'late' ? 'border-late/25 bg-late-bg/60' : tone === 'warn' ? 'border-warn/30 bg-warn-bg/60' : 'border-line bg-white'
   return (
-    <div className={`rounded-2xl border p-5 shadow-card ${toneClass} ${className}`}>
+    <div className={`hover-lift rounded-2xl border p-5 shadow-card ${toneClass} ${className}`}>
       <p className="text-[13px] font-medium text-muted">{label}</p>
       <p className="num mt-2 text-[28px] leading-none font-semibold text-ink">{value}</p>
       {(delta || sub) && (

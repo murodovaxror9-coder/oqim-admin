@@ -132,6 +132,11 @@ export default {
     demo: 'Demo kirish',
     demoHint: "Bosing, maydonlar o'zi to'ladi",
     side: 'Zal, oshxona va kassa bitta oqimda. Kechikishni mehmon emas, tizim birinchi sezadi.',
+    sceneRevenue: 'Bugungi tushum',
+    sceneTable: '7-stol',
+    sceneOnTime: 'Vaqtida',
+    scenePromise: "Va'da bajarildi",
+    welcome: 'Xush kelibsiz',
   },
   today: {
     title: 'Bugun',
