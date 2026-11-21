@@ -11,12 +11,14 @@ import { errorText, useT } from '../i18n/index.js'
 import { api } from '../lib/api.js'
 import { formatMoney } from '../lib/format.js'
 import { useAction } from '../lib/useAction.js'
+import { useCardTable } from '../lib/useCardTable.js'
 
 const STATIONS = ['hot', 'grill', 'kazan', 'cold', 'bar']
 const UNITS = ['portion', 'skewer', 'piece', 'pot', 'jug', 'glass']
 
 export function MenuPage() {
   const { t, lang } = useT()
+  const menuTable = useCardTable()
   const [category, setCategory] = useState('all')
   const [search, setSearch] = useState('')
   const [editing, setEditing] = useState(null)
@@ -86,7 +88,7 @@ export function MenuPage() {
 
             <div className="overflow-x-auto rounded-xl border border-line bg-surface">
               {items.length ? (
-                <table className="w-full min-w-[820px] text-left">
+                <table ref={menuTable} className="rtable w-full min-w-[820px] text-left">
                   <thead className="text-[12px] text-muted">
                     <tr className="border-b border-line">
                       <th className="px-5 py-3 font-semibold">{t('menu.colName')}</th>
@@ -111,7 +113,7 @@ export function MenuPage() {
                         <td className="num px-3 py-3 text-right text-[16px]">{formatMoney(item.price, lang)}</td>
                         <td className="num px-3 py-3 text-[16px]">{t('menu.perMinute', { n: item.prepMinutes })}</td>
                         <td className="px-3 py-3 text-[13px]">{t(`station.${item.station}`)}</td>
-                        <td className="px-3 py-3">
+                        <td data-wide className="px-3 py-3">
                           {item.batchSize ? (
                             <span className="flex items-center gap-2">
                               <Badge tone={item.batchStock === 0 ? 'late' : item.batchStock <= item.batchWarn ? 'warn' : 'ok'}>

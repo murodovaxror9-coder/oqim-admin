@@ -488,6 +488,11 @@ export default {
     portionsHour: 'porsiya/soat',
   },
   staff: {
+    sumTotal: 'Jami xodim',
+    sumOnShift: 'Hozir smenada',
+    sumWaiters: 'Ofitsiantlar smenada',
+    sumBlocked: 'Bloklangan',
+    sumOf: '{n} tadan',
     title: 'Xodimlar',
     tabPeople: 'Xodimlar',
     tabRoles: 'Rollar va huquqlar',

@@ -34,6 +34,19 @@ Swagger'da: `POST /api/auth/login` → javobdagi `token` ni **Authorize** ga qo'
 
 Haqiqiy ish uchun `backend/.env` da `DEMO_MODE=false` qiling va `JWT_SECRET` ni almashtiring (`backend/.env.example` dan nusxa oling). Bazani tozalash: `npm run reset`.
 
+## Testlar
+
+```bash
+npm test
+```
+
+Node.js'ning o'rnatilgan `node:test` bilan, qo'shimcha paketsiz. Har test fayli o'z vaqtinchalik bazasida ishlaydi (`backend/test/setup.js`):
+
+- `rules.test.js` — rang chegaralari, navbat formulasi, va'da va yaxlitlash;
+- `operations.test.js` — yordam qoidasi, eskalatsiya (administrator → ega), va'da buzilganda chegirma, qozon va stop-list, audit jurnali o'zgarmasligi;
+- `api.test.js` — kirish (PIN, rollar, urinishlar chegarasi), token himoyasi, sozlamalar va audit;
+- `time.test.js` — Toshkent vaqti va kun chegaralari.
+
 ## Tuzilma
 
 ```
@@ -47,6 +60,7 @@ backend/
     services/            qoidalar: rules, operations, escalation, exceptions, hall, dashboard, reports, forecast
     db/                  schema.sql (SQLite), seed, demo, reset
     demo/simulator.js    jonli zal simulyatsiyasi
+  test/                  node:test testlari
 frontend/
   src/
     pages/               11 ta ekran + kirish

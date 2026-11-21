@@ -6,7 +6,7 @@ import { Button } from '../components/ui/Button.jsx'
 import { Card, PageHeader } from '../components/ui/Card.jsx'
 import { Input } from '../components/ui/Field.jsx'
 import { Icon } from '../components/ui/Icon.jsx'
-import { StatTile } from '../components/ui/Stat.jsx'
+import { HeroCard } from '../components/ui/Hero.jsx'
 import { QueryState } from '../components/ui/States.jsx'
 import { useT } from '../i18n/index.js'
 import { api } from '../lib/api.js'
@@ -26,7 +26,7 @@ export function ForecastPage() {
   return (
     <>
       <PageHeader title={t('forecast.title')} subtitle={formatDate(date, lang, { weekday: true })} />
-      <div className="mb-6 flex flex-wrap gap-1.5" role="tablist" aria-label={t('forecast.title')}>
+      <div className="-mx-4 mb-6 flex gap-1.5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0" role="tablist" aria-label={t('forecast.title')}>
         {days.map((day) => (
           <button
             key={day}
@@ -34,7 +34,7 @@ export function ForecastPage() {
             role="tab"
             aria-selected={day === date}
             onClick={() => setDate(day)}
-            className={`rounded-lg px-3 py-2 text-left ${day === date ? 'bg-navy text-white' : 'border border-rule bg-surface hover:bg-mist'}`}
+            className={`shrink-0 rounded-lg px-3 py-2 text-left ${day === date ? 'bg-navy text-white' : 'border border-rule bg-surface hover:bg-mist'}`}
           >
             <span className={`block text-[12px] ${day === date ? 'text-dim' : 'text-muted'}`}>
               {day === today ? t('common.today') : day === addDays(today, 1) ? t('common.tomorrow') : weekdayName(weekday(day), lang)}
@@ -57,21 +57,23 @@ export function ForecastPage() {
                   : t('forecast.basisNone')}
               </p>
 
-              <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-                <StatTile
-                  label={t('forecast.revenue')}
-                  value={formatCompact(data.totals.revenue, lang)}
-                  sub={t('forecast.range', { min: formatCompact(data.totals.revenueMin, lang), max: formatCompact(data.totals.revenueMax, lang) })}
-                />
-                <StatTile label={t('forecast.orders')} value={formatNumber(data.totals.orders)} sub={`${t('forecast.guests')}: ${formatNumber(data.totals.guests)}`} />
-                <StatTile label={t('forecast.peak')} value={`${data.totals.peakHour}:00`} />
-                <StatTile
-                  label={t('forecast.staffing')}
-                  value={`${data.totals.waitersPeak} / ${data.totals.waitersScheduled}`}
-                  tone={short > 0 ? 'warn' : undefined}
-                  sub={short > 0 ? t('forecast.staffingShort', { n: short }) : t('forecast.staffingValue', { need: data.totals.waitersPeak, have: data.totals.waitersScheduled })}
-                />
-              </div>
+              <HeroCard
+                eyebrow={t('forecast.revenue')}
+                value={data.totals.revenue}
+                formatValue={(v) => formatCompact(v, lang)}
+                note={t('forecast.range', { min: formatCompact(data.totals.revenueMin, lang), max: formatCompact(data.totals.revenueMax, lang) })}
+                stats={[
+                  { label: t('forecast.orders'), value: formatNumber(data.totals.orders) },
+                  { label: t('forecast.guests'), value: formatNumber(data.totals.guests) },
+                  { label: t('forecast.peak'), value: `${data.totals.peakHour}:00` },
+                  {
+                    label: t('forecast.staffing'),
+                    value: `${data.totals.waitersPeak} / ${data.totals.waitersScheduled}`,
+                    tone: short > 0 ? 'warn' : undefined,
+                    sub: short > 0 ? t('forecast.staffingShort', { n: short }) : undefined,
+                  },
+                ]}
+              />
 
               <Card title={t('forecast.hourly')}>
                 <ColumnChart

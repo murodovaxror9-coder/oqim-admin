@@ -6,6 +6,7 @@ import { Card, PageHeader } from '../components/ui/Card.jsx'
 import { Field, Input, Select } from '../components/ui/Field.jsx'
 import { ConfirmDialog, Modal } from '../components/ui/Modal.jsx'
 import { Segmented } from '../components/ui/Segmented.jsx'
+import { StatTile } from '../components/ui/Stat.jsx'
 import { QueryState } from '../components/ui/States.jsx'
 import { errorText, useT } from '../i18n/index.js'
 import { api } from '../lib/api.js'
@@ -13,6 +14,7 @@ import { formatDuration, formatPhone } from '../lib/format.js'
 import { localTime } from '../lib/time.js'
 import { useAction } from '../lib/useAction.js'
 import { useAuth } from '../store/auth.js'
+import { useCardTable } from '../lib/useCardTable.js'
 
 const ROLE_ORDER = ['waiter', 'cook', 'cashier', 'admin', 'owner']
 const POSTS = { cook: ['hot', 'grill', 'kazan', 'cold', 'bar'] }
@@ -46,7 +48,16 @@ export function StaffPage() {
         }
       />
       <QueryState query={query} rows={5}>
-        {(data) => (tab === 'people' ? <People users={data.users} onEdit={setEditing} onPin={setPin} /> : <RolesMatrix roles={data.roles} />)}
+        {(data) =>
+          tab === 'people' ? (
+            <>
+              <Summary users={data.users} />
+              <People users={data.users} onEdit={setEditing} onPin={setPin} />
+            </>
+          ) : (
+            <RolesMatrix roles={data.roles} />
+          )
+        }
       </QueryState>
       <StaffModal user={editing} onClose={() => setEditing(null)} onPin={setPin} />
       <Modal
@@ -72,8 +83,31 @@ export function StaffPage() {
   )
 }
 
+function Summary({ users }) {
+  const { t } = useT()
+  const active = users.filter((u) => !u.blocked)
+  const onShift = active.filter((u) => u.onShift)
+  const waiters = active.filter((u) => u.role === 'waiter')
+  const waitersOn = waiters.filter((u) => u.onShift)
+  const blocked = users.length - active.length
+  return (
+    <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <StatTile label={t('staff.sumTotal')} value={users.length} />
+      <StatTile label={t('staff.sumOnShift')} value={onShift.length} sub={t('staff.sumOf', { n: active.length })} />
+      <StatTile
+        label={t('staff.sumWaiters')}
+        value={waitersOn.length}
+        sub={t('staff.sumOf', { n: waiters.length })}
+        tone={waiters.length > 0 && waitersOn.length === 0 ? 'warn' : undefined}
+      />
+      <StatTile label={t('staff.sumBlocked')} value={blocked} />
+    </div>
+  )
+}
+
 function People({ users, onEdit, onPin }) {
   const { t } = useT()
+  const staffTable = useCardTable()
   const me = useAuth((s) => s.user)
   const [confirm, setConfirm] = useState(null)
   const block = useAction(({ id, blocked }) => api.post(`/staff/${id}/${blocked ? 'block' : 'unblock'}`), {
@@ -93,7 +127,7 @@ function People({ users, onEdit, onPin }) {
   return (
     <>
       <div className="overflow-x-auto rounded-xl border border-line bg-surface">
-        <table className="w-full min-w-[880px] text-left">
+        <table ref={staffTable} className="rtable w-full min-w-[880px] text-left">
           <thead className="text-[12px] text-muted">
             <tr className="border-b border-line">
               <th className="px-5 py-3 font-semibold">{t('staff.colName')}</th>

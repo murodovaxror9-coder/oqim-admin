@@ -249,7 +249,8 @@
   padding-inline: 12px;
   border: 1px solid var(--color-rule);
   border-radius: 10px;
-  background: white;
+  background: var(--color-surface);
+  color: var(--color-ink);
   box-shadow: 0 1px 2px rgb(16 16 24 / 0.04);
   transition:
     border-color 0.15s,
@@ -296,5 +297,55 @@
 
   body {
     background: white;
+  }
+}
+
+/* Telefonda jadval qatorlari kartochka ko'rinishida (lib/useCardTable.js) */
+@media (max-width: 639.98px) {
+  .rtable {
+    min-width: 0 !important;
+  }
+
+  .rtable thead {
+    display: none;
+  }
+
+  .rtable tbody tr:not([data-group]) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 16px;
+    padding: 14px 16px;
+  }
+
+  .rtable tbody tr[data-group] {
+    display: block;
+  }
+
+  .rtable tbody tr:not([data-group]) > td {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    padding: 0 !important;
+    text-align: left !important;
+    min-width: 0;
+  }
+
+  .rtable tbody tr:not([data-group]) > td:first-child,
+  .rtable tbody tr:not([data-group]) > td[data-wide],
+  .rtable tbody tr:not([data-group]) > td:not([data-label]) {
+    grid-column: 1 / -1;
+  }
+
+  .rtable tbody td[data-label]::before {
+    content: attr(data-label);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-muted);
+  }
+
+  .rtable tbody tr:not([data-group]) > td:last-child:not([data-label]) > * {
+    justify-content: flex-start;
   }
 }

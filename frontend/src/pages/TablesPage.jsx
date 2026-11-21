@@ -72,13 +72,17 @@ export function TablesPage() {
                   )
                 }
               >
-                <FloorEditor
-                  floor={data.floor}
-                  tables={tables}
-                  selectedId={selectedId}
-                  onSelect={setSelectedId}
-                  onMove={(id, pos) => setLayout((current) => ({ ...current, [id]: pos }))}
-                />
+                <div className="-mx-4 overflow-x-auto px-4 pb-1 [scrollbar-width:thin]">
+                  <div className="min-w-[640px] md:min-w-0">
+                    <FloorEditor
+                      floor={data.floor}
+                      tables={tables}
+                      selectedId={selectedId}
+                      onSelect={setSelectedId}
+                      onMove={(id, pos) => setLayout((current) => ({ ...current, [id]: pos }))}
+                    />
+                  </div>
+                </div>
               </Card>
               <div>
                 {selected ? (
@@ -163,7 +167,7 @@ function FloorEditor({ floor, tables, selectedId, onSelect, onMove }) {
             onPointerDown={(e) => onPointerDown(e, table)}
             onKeyDown={(e) => onKeyDown(e, table)}
             onFocus={() => onSelect(table.id)}
-            className="cursor-grab outline-none active:cursor-grabbing"
+            className="cursor-grab touch-none outline-none active:cursor-grabbing"
           >
             {table.shape === 'round' ? (
               <ellipse cx={cx} cy={cy} rx={table.w / 2} ry={table.h / 2} fill={selected ? 'var(--color-tint)' : 'var(--color-surface)'} stroke={selected ? 'var(--color-brand)' : 'var(--color-dim)'} strokeWidth="2" />

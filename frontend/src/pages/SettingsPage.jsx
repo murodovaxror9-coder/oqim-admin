@@ -241,7 +241,7 @@ function SettingsForm({ initial }) {
       </div>
 
       {isOwner && dirty && (
-        <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 backdrop-blur lg:left-[248px]">
+        <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-surface/95 backdrop-blur lg:right-2 lg:bottom-2 lg:left-[265px] lg:rounded-b-[20px]">
           <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-3 px-4 py-3 lg:px-8">
             <span className="flex items-center gap-2 font-semibold text-warn-ink">
               <Icon name="info" size={18} />

@@ -489,6 +489,11 @@ export default {
     portionsHour: 'порций/час',
   },
   staff: {
+    sumTotal: 'Всего сотрудников',
+    sumOnShift: 'Сейчас на смене',
+    sumWaiters: 'Официанты на смене',
+    sumBlocked: 'Заблокированы',
+    sumOf: 'из {n}',
     title: 'Сотрудники',
     tabPeople: 'Сотрудники',
     tabRoles: 'Роли и права',

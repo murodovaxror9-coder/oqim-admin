@@ -39,9 +39,13 @@ export function HallPage() {
           const selected = hall.tables.find((table) => table.id === selectedId)
           return (
             <div className="grid gap-6 xl:grid-cols-[1fr_340px]">
-              <div className="space-y-6">
+              <div className="min-w-0 space-y-6">
                 <Card bodyClassName="p-4">
-                  <FloorMap hall={hall} selectedId={selectedId} onSelect={setSelectedId} elapsedOf={elapsedOf} />
+                  <div className="-mx-4 overflow-x-auto px-4 pb-1 [scrollbar-width:thin]">
+                    <div className="min-w-[640px] md:min-w-0">
+                      <FloorMap hall={hall} selectedId={selectedId} onSelect={setSelectedId} elapsedOf={elapsedOf} />
+                    </div>
+                  </div>
                   <Legend />
                 </Card>
                 {selected ? (

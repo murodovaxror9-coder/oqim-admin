@@ -7,7 +7,7 @@ export function Loader({ rows = 3, className = '' }) {
   return (
     <div className={`space-y-3 ${className}`} role="status" aria-label={t('common.loading')}>
       {Array.from({ length: rows }, (_, i) => (
-        <div key={i} className="h-16 animate-pulse rounded-xl bg-white/70" />
+        <div key={i} className="h-16 animate-pulse rounded-xl bg-surface/70" />
       ))}
     </div>
   )
