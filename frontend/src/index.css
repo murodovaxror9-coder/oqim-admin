@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-num: "Barlow Condensed", "Manrope", sans-serif;
+
+  --color-ink: #0f2240;
+  --color-navy: #0b1a33;
+  --color-night: #081427;
+  --color-brand: #1e4fc2;
+  --color-brand-dark: #163c96;
+  --color-sky: #8fb0ff;
+  --color-mist: #f2f5f5;
+  --color-line: #e0e7e6;
+  --color-rule: #d5dee8;
+  --color-muted: #44566f;
+  --color-dim: #a9b8cc;
+  --color-pale: #c9d4e3;
+  --color-deep: #22385c;
+  --color-track: #2b3f60;
+  --color-tint: #e8eefb;
+  --color-warn: #e89400;
+  --color-warn-bg: #fff1d6;
+  --color-warn-ink: #7a4a00;
+  --color-late: #c93322;
+  --color-late-bg: #fde8e4;
+  --color-late-ink: #9e2015;
+  --color-ok: #0b8a83;
+  --color-ok-bg: #e2f4f2;
+  --color-ok-ink: #0a6f69;
+  --color-compare: #8a6fd1;
+  --color-grid: #e4e9ef;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background: var(--color-mist);
+    color: var(--color-ink);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  input,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility num {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+@utility field {
+  width: 100%;
+  height: 40px;
+  padding-inline: 12px;
+  border: 1px solid var(--color-rule);
+  border-radius: 8px;
+  background: white;
+  transition: border-color 0.15s;
+
+  &:hover {
+    border-color: var(--color-dim);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 3px rgb(30 79 194 / 0.15);
+  }
+
+  &[aria-invalid="true"] {
+    border-color: var(--color-late);
+  }
+
+  &:disabled {
+    background: var(--color-mist);
+    color: var(--color-muted);
+  }
+}
+
+@keyframes pulse-late {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@utility pulse-late {
+  animation: pulse-late 1.6s ease-in-out infinite;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+  }
+}
